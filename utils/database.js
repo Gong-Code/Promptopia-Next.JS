@@ -8,7 +8,6 @@ export const connectToDB = async () => {
     if(isConnected){
         console.log("MongoDB is already connected");
         return;
-
     }
 
     try {
@@ -22,6 +21,6 @@ export const connectToDB = async () => {
 
         console.log("MongoDB connected")
     } catch (error) {
-        console.log(error)
+        return new Response("Failed to create a new prompt", { status: 500 })
     }
 }
