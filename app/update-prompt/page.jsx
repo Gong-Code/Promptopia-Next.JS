@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from "next/navigation";
+
 
 import Form from "@components/Form";
 
