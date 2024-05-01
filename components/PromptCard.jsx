@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-import Image from "next/image"
+import Image from "next/image";
+
 
 const PromptCard = ({ 
   post, 
@@ -16,6 +17,8 @@ const PromptCard = ({
 
   const { data: session } = useSession();
   const pathName = usePathname();
+  const router = useRouter();
+
 
 
   const handleCopy = () => {
@@ -30,7 +33,9 @@ const PromptCard = ({
       <div className="flex justify-between items-start
       gap-5">
         <div className="flex-1 flex justify-start
-        items-center gap-3 cursor-pointer">
+        items-center gap-3 cursor-pointer"
+        onClick={() => router.push(`/profile`)}
+        >
           <Image
             src={post.creator.image}
             alt="user_image"
@@ -63,16 +68,16 @@ const PromptCard = ({
           />
         </div>
       </div>
-
-      <p className="my-4 font-satoshi text-sm
-      text-gray-700">{post.prompt}</p>
-      <p className="font-inter text-sm blue_gradient 
-      cursor-pointer"
-      onClick={() => handleTagClick(post.tag)} 
-      >
-        #{post.tag}
-      </p>
-
+      <div>
+        <p className="my-4 font-satoshi text-sm
+        text-gray-700">{post.prompt}</p>
+        <p className="font-inter text-sm blue_gradient 
+        cursor-pointer"
+        onClick={() => handleTagClick(post.tag)} 
+        >
+          #{post.tag}
+        </p>
+      </div>
       {session?.user.id === post.creator._id && pathName === '/profile' && (
         <div className="mt-5 flex-center gap-4 
         border-t border-gray-200 pt-3">
