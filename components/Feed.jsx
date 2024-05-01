@@ -24,7 +24,13 @@ const Feed = () => {
 
   const handleSearchChange = (e) => {
     e.preventDefault();
+    setSearchText(e.target.value)
   }
+
+  const filteredPosts = searchText ? 
+  posts.filter(post => 
+    post.creator.username.includes(searchText) || post.tag.includes(searchText)) 
+  : posts;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -51,7 +57,7 @@ const Feed = () => {
       </form>
 
       <PromptCardList
-        data={posts}
+        data={filteredPosts}
         handleTagClick={() => {}}
       />
     </section>
